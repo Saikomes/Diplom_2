@@ -6,12 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static java.net.HttpURLConnection.HTTP_OK;
-import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.equalTo;
+import static ru.yandex.prakticum.helpers.UserHelpers.clearUserData;
 import static ru.yandex.prakticum.helpers.UserHelpers.registerUniqueUser;
 import static ru.yandex.prakticum.steps.OrderSteps.*;
-import static ru.yandex.prakticum.steps.UserSteps.*;
 
 public class AuthorizedUserOrdersTests extends BaseOrderTest {
     protected String accessToken;
@@ -39,13 +37,7 @@ public class AuthorizedUserOrdersTests extends BaseOrderTest {
     }
 
     @After
-    public void clearUserData() {
-        if (accessToken != null) {
-            try {
-                deleteUser(accessToken);
-            } catch (Exception e) {
-                System.err.println("Failed to delete user: " + e.getMessage());
-            }
-        }
+    public void tearDown() {
+        clearUserData(accessToken);
     }
 }

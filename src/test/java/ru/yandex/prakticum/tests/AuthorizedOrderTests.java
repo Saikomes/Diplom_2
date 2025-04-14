@@ -4,14 +4,11 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.prakticum.helpers.UserHelpers;
-import ru.yandex.prakticum.steps.OrderSteps;
 
 import static java.net.HttpURLConnection.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static ru.yandex.prakticum.steps.OrderSteps.createOrder;
-import static ru.yandex.prakticum.steps.UserSteps.*;
 import static ru.yandex.prakticum.helpers.UserHelpers.*;
 
 public class AuthorizedOrderTests extends BaseOrderTest {
@@ -53,13 +50,7 @@ public class AuthorizedOrderTests extends BaseOrderTest {
     }
 
     @After
-    public void clearUserData() {
-        if (accessToken != null) {
-            try {
-                deleteUser(accessToken);
-            } catch (Exception e) {
-                System.err.println("Failed to delete user: " + e.getMessage());
-            }
-        }
+    public void tearDown() {
+        clearUserData(accessToken);
     }
 }

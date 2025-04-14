@@ -15,13 +15,13 @@ public class BaseUserUpdateTests extends BaseUserTests {
         super.setUp();
         createTestUser();
         // Сохраняем оригинальные данные
-        this.originalEmail = email;
-        this.originalName = name;
+        this.originalEmail = user.getEmail();
+        this.originalName = user.getName();
     }
 
     @After
     public void restoreOriginalData() {
-        if (isUserCreated && accessToken != null) {
+        if (accessToken != null) {
             updateUser(accessToken, originalEmail, originalName);
         }
     }
